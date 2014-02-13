@@ -20,8 +20,14 @@ public class Main {
         HttpProxyServer server = DefaultHttpProxyServer.bootstrap()
                 .withPort(props.localPort as int)
                 .withChainProxyManager(new PacBasedChainedProxyManager(props.pacUrl))
+        .withSslEngineSource()
                 .start()
         log.info "Pacifier server started on port $props.localPort"
+
+        System.addShutdownHook {
+            log.info "Stopping server"
+            server.stop()
+        }
     }
 
     private static Properties loadProperties() {
