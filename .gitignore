@@ -1,0 +1,7 @@
+# intellij stuff
+.idea
+atlassian-ide-plugin.xml
+*.iml
+
+# maven stuff
+target
